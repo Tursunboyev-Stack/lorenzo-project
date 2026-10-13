@@ -220,7 +220,15 @@
       font-size: 17px
     }
 
+    .song span:first-child {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap
+    }
+
     .song {
+      gap: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -502,7 +510,7 @@
         <img class="gico" src="grand.jpg" alt="Grand Mobile">
         <div>
           <div class="gname">Grand Mobile RP</div>
-          <div class="gsub">Rolli o'yin • ID: 7</div>
+          <div class="gsub">Rolli o'yin • ID: 311</div>
           <div class="gtime"><svg viewBox="0 0 24 24">
               <path
                 d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 2a8 8 0 110 16 8 8 0 010-16zm-1 3v6l4.5 2.7.8-1.400L13 12.200V7z" />
@@ -512,8 +520,8 @@
     </section>
 
     <section class="panel">
-      <div class="song"><span id="song">Musiqa 1</span><button class="heart" id="heart" aria-label="Yoqtirish"><svg
-            viewBox="0 0 24 24">
+      <div class="song"><span id="song">Сам полечу сам доберусь</span><button class="heart" id="heart"
+          aria-label="Yoqtirish"><svg viewBox="0 0 24 24">
             <path
               d="M12 21l-1.5-1.300C5.4 15.2 2 12.1 2 8.500A5 5 0 017 3.500c1.7 0 3.4.8 5 2.5 1.6-1.7 3.3-2.5 5-2.500a5 5 0 015 5c0 3.6-3.4 6.7-8.5 11.200z" />
           </svg></button></div>
@@ -557,7 +565,7 @@
       <div id="about" hidden>
         <p class="txt">Lorenzo_Prime — bu o'yindagi nik name.</p>
         <p class="txt">Nik name egasi juda yaxshi odam va RP o'yinlarga qiziqadi. U Grand Mobile RP'da Administrator
-          darajasida o'ynaydi.</p>
+          darajasida o'ynagan.</p>
       </div>
 
       <div id="server" hidden>
@@ -569,7 +577,7 @@
       </div>
     </section>
 
-    <a class="link" href="https://t.me/usa_a77" target="_blank" rel="noopener"><span><svg viewBox="0 0 24 24">
+    <a class="link" href="https://t.me/lorenzo.prime01" target="_blank" rel="noopener"><span><svg viewBox="0 0 24 24">
           <path
             d="M9.8 15.500l-.4 4.100c.6 0 .8-.2 1.2-.6l2.8-2.7 5.8 4.300c1.1.6 1.8.3 2.1-1l3.8-17.800c.3-1.6-.6-2.2-1.6-1.800L1.8 10.600c-1.5.6-1.5 1.5-.3 1.900l5.7 1.8 13.2-8.300c.6-.4 1.2-.2.7.2z" />
         </svg>Telegram</span><svg viewBox="0 0 24 24">
@@ -616,6 +624,10 @@
     setInterval(() => { gs++; const h = Math.floor(gs / 3600), m = Math.floor(gs % 3600 / 60), s = gs % 60; $('gtime').textContent = [h, m, s].map(n => String(n).padStart(2, '0')).join(':'); }, 1000);
 
     // Pleyer: 10 ta musiqa — music.mp3, music1.mp3 ... music9.mp3. Tugasa keyingisi o'zi boshlanadi.
+    const NAMES = [
+      'Сам полечу сам доберусь', 'Floating in Reverie', 'Медина', 'Maphupho', 'Xatlar',
+      'Только у нее', 'В горле ком', 'Dam Olamiz', 'MATRANG — Заманчива...', 'Beanie'
+    ];
     const TRACKS = ['music.mp3', ...Array.from({ length: 9 }, (_, i) => `music${i + 1}.mp3`)];
     const au = $('audio');
     let ti = 0, wantPlay = false, failed = new Set();
@@ -623,7 +635,7 @@
     function load(i) {
       ti = (i + TRACKS.length) % TRACKS.length;
       au.src = TRACKS[ti];
-      $('song').textContent = 'Musiqa ' + (ti + 1);
+      $('song').textContent = NAMES[ti];
       $('cur').textContent = '00:00'; $('dur').textContent = '00:00'; $('fill').style.width = '0%';
       if (wantPlay) au.play().catch(() => { });
     }
